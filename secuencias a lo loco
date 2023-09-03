@@ -1,0 +1,73 @@
+#include<iostream> 
+using namespace std; 
+void cinco(int* ini,int* fin){ 
+	int aux; 
+	while(fin-ini >=2){ 
+		aux=*ini; 
+		*ini=*(fin-1); 
+		*(fin-1)=aux; 
+		ini++,fin--; 
+	} 
+} 
+void sort(int* ini,int* fin){ 
+	int aux; 
+	for(int *i=ini+1;i<fin-1;i++){ 
+		for(int *j=ini+1;j<fin-1;j++){ 
+			if(*j>*(j+1)){ 
+				aux=*j; 
+				*j=*(j+1); 
+				*(j+1)=aux; 
+			} 
+		} 
+	} 
+} 
+int main(){ 
+	int N,min,max; 
+	cin>>N; 
+	int secuencia[N]; 
+	for(int i=0;i<N;i++){ 
+		cin>>secuencia[i]; 
+	} 
+	for(int i=0;i<N;i++){ 
+		if(secuencia[i]==5){ 
+			cinco(&secuencia[0],&secuencia[i]); 
+			min=i; 
+			break; 
+		} 
+	} 
+	/*for(int i=0;i<N;i++){ 
+		cout<<secuencia[i]<<" "; 
+	}
+	cout<<"\n";*/
+	for(int i=min+1;i<N;i++){ 
+		if(secuencia[i]==5){ 
+			cinco(&secuencia[i+1],&secuencia[N]); 
+			max=i; 
+			break; 
+		} 
+	} 
+	/*for(int i=0;i<N;i++){ 
+		cout<<secuencia[i]<<" "; 
+	} 
+	cout<<"\n";*/ 
+    char band='F'; 
+    for(int i=min;i<max;i++){ 
+    	if(secuencia[i]==7){ 
+    	 	secuencia[i]=0; 
+    		band='V'; 
+            break; 
+		} 
+	} 
+    /*cout<<band<<endl; 
+	for(int i=0;i<N;i++){ 
+		cout<<secuencia[i]<<" "; 
+	} 
+	cout<<"\n";*/
+	if(band=='F'){ 
+    	sort(&secuencia[min],&secuencia[max]); 
+	} 
+	for(int i=0;i<N;i++){ 
+    	cout<<secuencia[i]<< " "; 
+	} 
+	return 0; 
+}
